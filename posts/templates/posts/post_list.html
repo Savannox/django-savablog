@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blog{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+        <section class="post-page">
+            <div class="posts-box">
+                <div class="add-post-button">
+                    <a href="{% url 'create' %}"><i class="material-icons">edit</i></a>
+                </div>
+                {% for post in posts %}
+                    <div class="full-post">
+                        <div class="post-header">
+                            <div>
+                                <img src="{{post.user.profile.photo.url}}" alt="{{post.user}}-post">
+                                <div>
+                                    <span>{{post.user.first_name}} {{post.user.last_name}}</span>
+                                    <a href="{% url 'public' post.user.profile.id %}">
+                                        <span>@{{post.user.username}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <span>{{post.created|date:"d/m/y h:i a"}}</span>
+                        </div>
+                        <div class="post-body">
+                            <h3>{{post.title}}</h3>
+                            <p>{{post.content|linebreaks}}</p>
+                            {% if post.image %}
+                            <img src="{{post.image.url}}" alt="post-image">
+                            {% endif %}
+                        </div>
+                        <div class="post-comments">
+                            <h4>Comentarios</h4>
+                            {% for comment in post.commentsmodel_set.all %}
+                                <div class="comment">
+                                    <div class="comment-profile">
+                                        <div>
+                                            <img src="{{comment.user.photo.url}}" alt="" width="25px">
+                                            <div>
+                                                <span>{{comment.user.user.first_name}} {{comment.user.user.last_name}}</span>
+                                                <a href="{% url 'public' comment.user.id %}">
+                                                    <span>@{{comment.user}}</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <span>{{comment.created|date:"d/m/y h:i a"}}</span>
+                                    </div>
+                                    <div class="comment-text">
+                                        <p>{{comment.text|linebreaks}}</p>
+                                    </div>
+                                    {% if comment.user.user == request.user %}
+                                    <div class="del-post">
+                                        <a class="material-icons" href="{% url 'delcom' comment.id %}">delete</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            {% empty %}
+                            <div>
+                                <span>Sin comentarios</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="add-comment">
+                            <form action="{% url 'comment' post.id %}" method="POST">
+                                {% csrf_token %}
+                                <div>
+                                    <textarea name="comment" required id="" cols="30" rows="10" placeholder="Añadir comentario"></textarea>
+                                    <input type="submit" value="Publicar">
+                                </div>
+                            </form>
+                        </div>
+                        {% if post.user == request.user %}
+                        <div class="del-post">
+                            <a class="material-icons" href="{% url 'delpost' post.id %}">delete</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="paginator">
+                    {% if posts.has_previous %}
+                        <a href="?page={{ posts.previous_page_number }}">Anterior</a>
+                    {% endif %}
+                    {% if posts.has_next %}
+                        <a href="?page={{ posts.next_page_number }}">Siguiente</a>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+</body>
+</html> 

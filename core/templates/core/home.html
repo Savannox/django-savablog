@@ -1,0 +1,47 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Inicio{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+        <section class="home">
+            <h2>Bienvenidos a SavaBlog</h2>
+            <p>Este es un blog creado con mis propias manos que hice a modo de tener un proyecto para mi curriculum como desarrollador web,
+                 este blog solo se lo pasare a gente conocida la cual tendra la posibilidad de crearse una cuenta o iniciar sesion si ya la
+                  tienen, para poder crear publicaciones de cualquier cosa que se les ocurra compartir.</p>
+            
+            {% if user.is_authenticated %}
+                <div class="home-box">
+                    <div>
+                        <h3>Hola {{request.user.first_name}} {{request.user.last_name}}, bienvenido de nuevo!</h3>
+                    </div>
+                    <div class="home-div">
+                        <a class="home-register-button" href="{% url 'blog' %}">
+                            <button>Ver Publicaciones</button>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="home-box">
+                    <div>
+                        <h3>Por favor selecciona una opcion para continuar</h3>
+                    </div>
+                    <div class="home-div">
+                        <a href="{% url 'login' %}">
+                            <button>Iniciar sesion</button>
+                        </a>
+                        <a class="home-register-button" href="{% url 'register' %}">
+                            <button>Registrarse</button>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}  
+        </section>    
+    {% endblock %}
+</body>
+</html>

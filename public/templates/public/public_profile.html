@@ -1,0 +1,142 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Perfil{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+        <section class="post-page">
+            <div class="public-header">
+                <div class="photo-box">
+                    <img src="{{profile.photo.url}}" alt="{{profile.user.username}}">
+                    <div>
+                        <span>{{profile.user.first_name}} {{profile.user.last_name}}</span>
+                        <span>@{{profile.user.username}}</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="public-follower">
+                        <div>
+                            <span>{{profile.user.following.count}} <a href="{% url 'followerlist' profile.id %}">Seguidores</a></span>
+                            <span>{{profile.followers.count}} <a href="{% url 'followerlist' profile.id %}">Seguidos</a></span>
+                        </div>
+                        {% if request.user != profile.user %}
+                        <div class="follower-buttons">
+                            {% if is_follower %}
+                            <form action="{% url 'followsys' profile_id=profile.id action='unfollow' %}" method="POST">
+                                    {% csrf_token %}
+                                <input type="submit" value="Siguiendo">
+                            </form>
+                            {% else %}
+                            <form action="{% url 'followsys' profile_id=profile.id action='follow' %}" method="POST">
+                                    {% csrf_token %}
+                                <input type="submit" value="Seguir">
+                            </form>
+                            {% endif %}
+                        </div>
+                        {% endif %} 
+                    </div>
+                </div>
+            </div>
+            <div class="about-me">
+                <span>Sobre mi</span>
+                <p>{{profile.bio|linebreaks}}</p>
+            </div>
+            <div class="edit-button">
+                {% if profile.user == request.user %}
+                    <a class="material-icons" href="{% url 'profile' %}">edit</a>
+                {% endif %}
+                <div>
+                    <span>Publicaciones</span>
+                </div>
+            </div>
+            <div class="posts-box">
+                {% if posts %}
+                {% for post in posts %}
+                    <div class="full-post">
+                        <div class="post-header">
+                            <div>
+                                <img src="{{post.user.profile.photo.url}}" alt="" width="100px">
+                                <div>
+                                    <span>{{post.user.first_name}} {{post.user.last_name}}</span>
+                                    <span>@{{post.user.username}}</span>
+                                </div>
+                            </div>
+                            <span>{{post.created|date:"d/m/y h:i a"}}</span>
+                        </div>
+                        <div class="post-body">
+                            <h3>{{post.title}}</h3>
+                            <p>{{post.content|linebreaks}}</p>
+                            {% if post.image %}
+                            <img src="{{post.image.url}}" alt="post-image" width="800px">
+                            {% endif %}
+                        </div>
+                        <div class="post-comments">
+                            <h4>Comentarios</h4>
+                            {% for comment in post.commentsmodel_set.all %}
+                                <div class="comment">
+                                    <div class="comment-profile">
+                                        <div>
+                                            <img src="{{comment.user.photo.url}}" alt="">
+                                            <div>
+                                                <span>{{comment.user.user.first_name}} {{comment.user.user.last_name}}</span>
+                                                <a href="{% url 'public' comment.user.id %}">
+                                                    <span>@{{comment.user}}</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <span>{{comment.created|date:"d/m/y h:i a"}}</span>
+                                    </div>
+                                    <div class="comment-text">
+                                        <p>{{comment.text|linebreaks}}</p>
+                                    </div>
+                                    {% if comment.user.user == request.user %}
+                                    <div class="del-post">
+                                        <a class="material-icons" href="{% url 'delco' comment.post.user.profile.id comment.id %}">delete</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            {% empty %}
+                            <div>
+                                <span>Sin comentarios</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="add-comment">
+                            <form action="{% url 'coment' profile.id post.id %}" method="POST">
+                                {% csrf_token %}
+                                <div>
+                                    <textarea name="comment" required id="" cols="30" rows="10" placeholder="Comentario..."></textarea>
+                                    <input type="submit" value="Publicar">
+                                </div>
+                            </form>
+                        </div>
+                        {% if post.user == request.user %}
+                        <div class="del-post">
+                            <a class="material-icons" href="{% url 'delpos' post.user.profile.id post.id %}">delete</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="paginator">
+                    {% if posts.has_previous %}
+                        <a href="?page={{ posts.previous_page_number }}">Anterior</a>
+                    {% endif %}
+                    {% if posts.has_next %}
+                        <a href="?page={{ posts.next_page_number }}">Siguiente</a>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="no-posts">
+                    <span>No tiene publicaciones aun</span>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+    {% endblock %}
+</body>
+</html>

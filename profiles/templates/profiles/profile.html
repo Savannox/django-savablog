@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load l10n %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Perfil{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+        <section class="edit-profile">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <div>
+                        <div class="edit-profile-inputs">
+                            <div>
+                                <label>Nombre</label>
+                                <input class="controls" type="text" name="first_name" value="{{profile.user.first_name}}">
+                            </div>
+                            <div>
+                                <label>Apellido</label>
+                                <input class="controls" type="text" name="last_name" value="{{profile.user.last_name}}">
+                            </div>
+                        </div>
+                        <div class="edit-profile-inputs">
+                            <div>
+                                <label>{{profile.birthday|date:"d/m/Y"}}</label>
+                                <input type="date" name="birthday">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="edit-profile-photo">
+                        <img src="{% if profile.photo %}{{profile.photo.url}}{% endif %}" alt="profile-photo">
+                        <div>
+                            <label for="id_photo" class="edit-profile-buttons">Cambiar foto</label>
+                            <input class="files" type="file" name="photo" accept="image/*" id="id_photo">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <textarea class="text-areas" name="bio">{{profile.bio}}</textarea>
+                </div>
+                <div class="edit-profile-footer">
+                    <span>Perfil creado el {{profile.created|date:"d/m/Y"}}</span>
+                    <button class="edit-profile-buttons">Guardar</button>
+                </div>
+            </form>
+        </section>
+    {% endblock %}
+</body>
+</html>

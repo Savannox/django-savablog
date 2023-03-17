@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'core/img/letra-s.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'core/css/styles4.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>SavaBlog - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="{% url 'home' %}">
+                <img src="{% static 'core/img/letra-s.png' %}" alt="logo">
+                <span>avaBlog</span>
+            </a>
+        </div>
+        <label for="menu"><i class="material-icons">menu</i></label>
+        <input type="checkbox" id="menu">
+        <nav>
+            <ul>
+                <li><a href="{% url 'contact' %}">Contacto</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'blog' %}">Publicaciones</a></li>
+                <li>
+                    <div>
+                        <img src="{{request.user.profile.photo.url}}" alt="{{request.user}}" id="profile">
+                        <span id="profile">@{{request.user}}</span>
+                        <ul>
+                            <li><a href="{% url 'public' request.user.profile.id %}">Mi perfil</a></li>
+                            <li><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+                        </ul>
+                    </div>
+                </li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Iniciar sesion</a></li>
+                <li><a class="register-button" href="{% url 'register' %}">Registrarse</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <div class="secundary-pages">
+            <a href="#">Aviso legal</a> • <a href="#">Cookies</a> • <a href="#">Politica de privacidad</a>
+        </div>
+        <div class="link-box">
+            <div class="links">
+                <img src="{% static 'core/img/facebook.png' %}" alt="facebook-logo">
+                <a href="">Ivan Kunstler</a>
+            </div>
+            <div class="links">
+                <img src="{% static 'core/img/instagram.png' %}" alt="instagram-logo">
+                <a href="">@ivank_1102</a>
+            </div>
+            <div class="links">
+                <img src="{% static 'core/img/twitter.png' %}" alt="twitter-logo">
+                <a href="">@SavannoxTW</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>©Copyright SavaBlog</p>
+        </div>
+    </footer>
+</body>
+</html>

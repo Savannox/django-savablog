@@ -1,0 +1,34 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Completar{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+        <section class="register-page">
+            <h2>Gracias por registrarte!</h2>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="date-box">
+                    <label for="birthday">Fecha de nacimiento</label>
+                    <input type="date" name="birthday" class="date-inputs">
+                </div>
+                <div>
+                    <div>
+                        <input required type="text" name="first_name" placeholder="Nombre" class="controls">
+                        <input required type="text" name="last_name" placeholder="Apellido" class="controls">
+                    </div>
+                </div>
+                <div>
+                    <textarea class="text-areas" name="bio" id="" cols="30" rows="10" placeholder="Sobre mi"></textarea>
+                </div>
+                <button>Guardar</button>
+            </form>
+        </section>
+    {% endblock %}
+</body>
+</html>

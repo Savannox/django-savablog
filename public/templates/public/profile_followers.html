@@ -1,0 +1,85 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{profile.user}}{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+    <section class="post-page">
+        <div class="public-header">
+            <div class="photo-box">
+                <img src="{{profile.photo.url}}" alt="{{profile.user}}" width="50px">
+                <div>
+                    <span>@{{profile.user}}</span>
+                    <span>{{profile.user.first_name}} {{profile.user.last_name}}</span>
+                </div>
+            </div>
+            <div>
+                <div class="public-follower">
+                    <div>
+                        <span>{{profile.user.following.count}} Seguidores</span>
+                        <span>{{profile.followers.count}} Seguidos</span>
+                    </div>
+                    {% if request.user != profile.user %}
+                    <div class="follower-buttons">
+                        {% if is_follower %}
+                        <form action="{% url 'followsys' profile_id=profile.id action='unfollow' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="Siguiendo">
+                        </form>
+                        {% else %}
+                        <form action="{% url 'followsys' profile_id=profile.id action='follow' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="Seguir">
+                        </form>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="follower-lists">
+            <div>
+                <div>
+                    <span>Seguidores</span>
+                </div>
+                {% for follower in profile.user.following.all %} {# Esto me devuelve los Profiles #}
+                <div>
+                    <img src="{{follower.photo.url}}" alt="{{follower.user}}">
+                    <div>
+                        <span>{{follower.user.first_name}} {{follower.user.last_name}}</span>
+                        <a href="{% url 'public' follower.id %}">
+                            <span>@{{follower.user}}</span>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div>
+                <div>
+                    <span>Seguidos</span>
+                </div>
+                {% for following in profile.followers.all %} {# Esto me devuelve los User #}
+                <div>
+                    <img src="{{following.profile.photo.url}}" alt="{{following.username}}">
+                    <div>
+                        <span>{{following.first_name}} {{following.last_name}}</span>
+                        <a href="{% url 'public' following.profile.id %}">
+                            <span>@{{following.username}}</span>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </section>
+    {% endblock %}
+</body>
+</html>

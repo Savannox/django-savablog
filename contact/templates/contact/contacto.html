@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Contactanos{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+    <section class="register-page">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div>
+                {{form.name}}
+            </div>
+            {{form.name.errors}}
+            <div>
+                {{form.email}}
+            </div>
+            {{form.email.errors}}
+            <div>
+                {{form.message}}
+            </div>
+            {{form.content.errors}}
+            {% if 'ok' in request.GET %}
+            <p class="ok">Su mensaje se ha enviado correctamente, en breve sera contactado</p>
+            {% endif %}
+            <button>Enviar</button>
+        </form>
+    </section>
+    {% endblock %}
+</body>
+</html>

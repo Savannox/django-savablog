@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Crear publicacion{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+        <section class="register-page">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_div}}
+                <button>Publicar</button>
+            </form>
+        </section>
+    {% endblock %}
+</body>
+</html>

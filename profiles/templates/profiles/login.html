@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Inicio de sesion{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+    <section class="register-page">
+        <h2>Iniciar sesion</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div>
+                <input class="controls" type="text" name="username" required placeholder="Nombre de usuario">
+            </div>
+            <div>
+                <input class="controls" type="password" name="password" required placeholder="Contraseña">
+            </div>
+            <button>Iniciar sesion</button>
+            <p>{{error}}</p>
+            <a href="{% url 'register' %}">¿No tienes una cuenta?</a>
+        </form>
+    </section>
+{% endblock %}
+</body>
+</html>
