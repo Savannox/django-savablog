@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail, EmailMessage
 from contact.forms import ContactForm
-from blog.settings import EMAIL_HOST_USER
 from django.urls import reverse
+from decouple import config
 
 # Create your views here.
 
@@ -17,7 +17,7 @@ def ContactView(request):
             email_sended = EmailMessage(
                 'SavaBlog: Nuevo mensaje de contacto',
                 f'De {name} <{email}>\n\nEscribio:\n{message}',
-                EMAIL_HOST_USER,
+                config('EMAIL_HOST_USER'),
                 ['ivankunstler2016@gmail.com'],
                 reply_to=[email]
             )

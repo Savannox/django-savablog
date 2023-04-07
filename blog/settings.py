@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import json
 import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,15 +41,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #Email
-EMAIL_SETTINGS_FILE = os.path.join(BASE_DIR, 'email_settings.json')
-with open(EMAIL_SETTINGS_FILE) as data_file:
-    email_settings = json.load(data_file)
-
-EMAIL_HOST = email_settings['EMAIL_HOST']
-EMAIL_HOST_USER = email_settings['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = email_settings['EMAIL_HOST_PASSWORD']
-EMAIL_PORT = email_settings['EMAIL_PORT']
-EMAIL_USE_TLS = email_settings['EMAIL_USE_TLS']
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # Application definition
 

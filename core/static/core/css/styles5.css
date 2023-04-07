@@ -1,0 +1,732 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    list-style: none;
+    text-decoration: none;
+    color: #eee;
+}
+body{
+    background-color: #131313;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 250px;
+}
+
+
+/* Diseño de la barra de navegacion */
+header>label, header>input{
+    display: none;
+}
+header{
+    background-color: #131313;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 25px;
+}
+header div{
+    display: flex;
+    align-items: center;
+}
+header div a{
+    display: flex;
+    align-items: center;
+}
+header div a img{
+    width: 30px;
+}
+header div a span{
+    font-weight: bold;
+    font-size: 25px;
+}
+header nav{
+    height: 40px;
+}
+header nav>ul{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+header nav>ul li{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+header nav>ul li a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 15px;
+}
+.register-button{
+    background-color: #db3e00;
+    height: 70%;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px;
+    margin: 0px 0px 0px 10px;
+    font-weight: bolder;
+    color: #000;
+}
+header nav ul li div{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 0px 15px;
+    height: 100%;
+}
+header nav ul li div img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+header nav ul li div span{
+    font-size: 15px;
+}
+
+
+/* Diseño del sub menu de la barra de navegacion */
+header nav ul li div ul{
+    background-color: #222222;
+    box-shadow: 0px 0px 10px 0px #000;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 39px;
+    right: 30px;
+    padding: 5px 0;
+    display: none;
+    transition: opacity, 0.3s, ease-in-out;
+}
+header nav ul li div:hover ul{
+    display: block;
+}
+header nav ul li div ul li a{
+    padding: 5px 10px;
+    transition: all 0.3s ease-in-out;
+}
+header nav ul li div ul li a:hover{
+    background-color: #131313;
+    transform: scale(1.1);
+}
+
+
+/* Diseño del pie de pagina */
+footer{
+    background-color: #131313;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    bottom: 0;
+}
+footer .secundary-pages{
+    padding: 5px 0;
+}
+footer .secundary-pages a{
+    color: #eee;
+}
+footer .link-box{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 12px 0;
+}
+footer .link-box .links{
+    display: flex;
+    gap:5px;
+    align-items: center;
+}
+footer .link-box .links img{
+    width: 25px;
+}
+footer .link-box .links a{
+    color: #eee;
+}
+footer .copyright p{
+    margin-bottom: 5px;
+    color: #808080;
+}
+
+
+/* Diseño de la pagina de Inicio */
+.home{
+    width: 100%;
+    height: 100vh;
+    padding: 50px;   
+}
+.home h2{
+    font-size: 40px;
+}
+.home-box{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.home .home-div{
+    display: flex;
+    gap: 15px;
+}
+.home .home-div button{
+    background-color: #090909;
+    color: #eee;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bolder;
+    padding: 10px;
+    cursor: pointer;
+}
+.home .home-div .home-register-button button{
+    background-color: #db3e00;
+    color: #000;
+}
+
+
+/* Formulario de registro */
+.register-page{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.register-page form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 300px;
+}
+.register-page form div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.register-page form div div{
+    display: flex;
+    gap: 10px;
+}
+.controls{
+    background-color: #101010;
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #808080;
+    outline: none;
+    font-size: 15px;
+}
+.text-areas{
+    background-color: #101010;
+    height: 200px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    outline: none;
+    font-size: 15px;
+    resize: none;
+}
+.date-inputs{
+    background-color: #101010;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    padding: 0px 10px;
+    color: #808080;
+    font-size: 15px;
+    outline: none;
+    text-align: center;
+}
+.date-inputs[type="date"]::-webkit-calendar-picker-indicator{
+    display: none;
+}
+.date-box{
+    display: flex;
+    flex-direction: column;
+}
+.register-page form a{
+    color: #aaa;
+    font-size: 15px;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #101010 inset; /* Fondo oscuro */
+    -webkit-text-fill-color: #fff !important; /* Texto blanco */
+}
+.register-page form button{
+    background-color: #db3e00;
+    color: #000;
+    font-size: 17px;
+    font-weight: bolder;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+.register-page form div label{
+    background-color: #090909;
+    width: 100%;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 10px;
+    color: #eee;
+    font-weight: bolder;
+    cursor: pointer;
+    text-align: center;
+}
+.files{
+    display: none;
+}
+
+
+/* Diseño para las publicaciones */
+.post-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.posts-box{
+    width: 70%;
+}
+.paginator{
+    display: flex;
+    justify-content: center;
+}
+.add-post-button{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+}
+.add-post-button a{
+    background-color: #db3e00;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 50px;
+    z-index: 100;
+}
+.post-page>div>div{
+    margin: 20px;
+}
+.full-post{
+    background-color: #090909;
+    padding: 20px;
+    border-radius: 10px;
+}
+.post-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+}
+.post-header>span{
+    color: #808080;
+}
+.post-header>div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.post-header div img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.post-header div div{
+    display: flex;
+    flex-direction: column;
+}
+.post-header div div a span{
+    color: #db3e00;
+}
+.post-body{
+    padding: 10px;
+}
+.post-body p{
+    margin: 10px 0;
+}
+.post-body img{
+    width: 100%;
+}
+.post-comments>div{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.post-comments>div>span{
+    color: #808080;
+}
+.post-comments h4{
+    text-align: center;
+    border-top: 1px solid #808080;
+    padding: 10px;
+}
+.comment{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px solid #808080;
+}
+.comment-profile{
+    display: flex;
+    justify-content: space-between;
+}
+.comment-profile>span{
+    color: #808080;
+}
+.comment-profile>div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.comment-profile div img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.comment-profile div div{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.comment-profile div div a span{
+    color: #db3e00;
+}
+.comment-text{
+    padding: 0 10px;
+    margin-top: 10px;
+}
+.add-comment div{
+    display: flex;
+    gap: 10px;
+}
+.add-comment div textarea{
+    background-color: #131313;
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    resize: none;
+    outline: none;
+}
+.add-comment div input{
+    position: relative;
+    background-color: #db3e00;
+    padding: 0 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 15px;
+    cursor: pointer;
+}
+.del-post{
+    margin-top: 15px;
+    display: flex;
+    justify-content: end;
+}
+.no-posts{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.no-posts span{
+    position: relative;
+    color: #808080;
+    left: -20px;
+}
+
+
+/* Diseño del perfil publico */
+.public-header{
+    background-color: #090909;
+    width: 80%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.public-header>div>div>div{
+    display: flex;
+    gap: 20px;
+}
+.photo-box{
+    display: flex;
+    gap: 10px;
+}
+.photo-box>img{
+    height: 50px;
+    width: 50px;
+}
+.photo-box>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.public-follower{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.public-follower>div>span:hover{
+    color: #db3e00;
+}
+.public-follower>div>span>a:hover{
+    color: #db3e00;
+}
+.follower-buttons{
+    display: flex;
+    justify-content: end;
+}
+.follower-buttons form input{
+    background-color: #db3e00;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 6px;
+    color: #eee;
+    cursor: pointer;
+}
+.about-me{
+    background-color: #090909;
+    width: 80%;
+    height: 170px;
+    padding: 20px;
+}
+.about-me span{
+    color: #808080;
+}
+.edit-button{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.edit-button>div{
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    border-top: 1px solid #808080;
+    left: 20px;
+}
+
+
+/* Diseños del editor de perfil */
+.edit-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.edit-profile form{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.edit-profile>form>div{
+    display: flex;
+}
+.edit-profile form div span{
+    color: #808080;
+}
+.edit-profile form div img{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+.edit-profile>form>div>div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.edit-profile-inputs{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.edit-profile-inputs div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.edit-profile-inputs label{
+    background-color: #090909;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    font-weight: bolder;
+}
+.edit-profile-inputs input[type="date"]{
+    background-color: #101010;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #808080;
+    font-size: 15px;
+    color: #eee;
+    text-align: center;
+    outline: none;
+}
+.edit-profile-inputs input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+.edit-profile-photo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 40%;
+}
+.edit-profile-buttons{
+    background-color: #db3e00;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    font-weight: bolder;
+    color: #000;
+    cursor: pointer;
+}
+.edit-profile-footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* Lista de seguidores */
+.follower-lists{
+    background-color: #090909;
+    display: flex;
+    margin: auto;
+}
+.follower-lists>div>div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 0;
+    border-bottom: 1px solid #808080;
+    margin-bottom: 10px;
+}
+.follower-lists div div img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.follower-lists div div div{
+    display: flex;
+    flex-direction: column;
+}
+.follower-lists div div div a:hover span{
+    color: #db3e00;
+}
+
+
+/* Diseños para celular */
+@media(max-width:500px){
+    main{
+        position: relative;
+        top: 40px;
+    }
+    header{
+        padding: 5px 0;
+        position: fixed;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        z-index: 10;
+        height: auto;
+    }
+    header nav{
+        display: none;
+        z-index: 10;
+    }
+    header nav ul{
+        flex-direction: column;
+        gap: 10px;
+    }
+    header nav ul li div ul{
+        display: block;
+        position: static;
+        background: none;
+        box-shadow: none;
+    }
+    #profile{
+        display: none;
+    }
+    .link-box{
+        flex-direction: column;
+        gap: 10px;
+    }
+    header input{
+        display: none;
+    }
+    header label{
+        display: block;
+        position: absolute;
+        left: 10px;
+        top: 5px;
+        z-index: 10;
+    }
+    header label i{
+        user-select: none;
+    }
+    header input:checked + nav{
+        display: block;
+        height: 120px;
+    }
+    .register-page>h3{
+        padding: 0 20px;
+    }
+    .posts-box{
+        width: 100%;
+    }
+    .date-inputs[type="date"]::-webkit-calendar-picker-indicator{
+        display: block;
+        color: #eee;
+    }
+    .edit-profile form{
+        width: 90%;
+    }
+    .edit-profile>form>div{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .public-header{
+        width: 90%;
+    }
+    .public-header span{
+        font-size: 13px;
+    }
+    .about-me{
+        width: 90%;
+    }
+}
